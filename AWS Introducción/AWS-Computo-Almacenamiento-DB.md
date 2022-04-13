@@ -59,3 +59,45 @@ Supongamos que queremos tener una aplicacion que diariamente envia un mensaje en
 - El precio depende del uso de RAM
 - 128MB RAM x 30M eventos por mes.
 - $11.63 al mes
+
+# Almacenamiento en AWS
+Uso de servicios en la nube para poner los datos en la nube 
+## Almacenamiento
+- Archivo, organizador por carpetas y subcarpetas (sistema de ficheros) **Amazon Elastic File System (EFS)/ Amazon FSx for Window File Server**
+- Bloque, los archivos se almacena en volúmenes por fragmentos de datos de igual tamaño, sin procesar: **Amazon Elastic Block Store (EBS)** lo usa S2.
+    - Bases de datos
+    - Servidor de correo electrónico 
+- Objetos, la información almacenada recibe un identificador único y se almacenan en un sistema de memoria plana: **Amazon Simple Storage Service (S3)**
+## Respaldo
+- Amazon Backup: Administra de forma centralizada todas las tareas de copia.
+## Transferencia de datos
+- **AWS Storage Gateway:** es un conjunto de servicios de almacenamiento en la nube híbrida que le brinda acceso en las instalaciones al almacenamiento en la nube prácticamente ilimitado
+- **AWS DataSync:** es un servicio seguro en línea que automatiza y acelera el traslado de datos entre las instalaciones y los servicios de almacenamiento de AWS
+- **AWS Transfer Family:** escala de forma segura sus transferencias recurrentes de archivos de empresa a empresa a Amazon S3 y Amazon EFS con los protocolos SFTP, FTPS y FTP
+
+# S2 y S3 Glacier
+S3 almacena objetos con durabilidad de datos con 11 9's osea es 99.999999999% cuando almacena algo, se almacena una copia en varios sistemas de datos, protegido contra fallas y errores. 
+## Clases de almacenamiento (mas info)
+- S3 Standard: ofrece almacenamiento de objetos de alta durabilidad, disponibilidad y rendimiento para datos a los que se obtiene acceso con frecuencia
+- S3 Standard-IA: Acceso poco frecuente, se utiliza con datos a los que se obtiene acceso con menos frecuencia, pero que requieren un acceso rápido cuando es necesario
+- S3 Zone-IA: Acceso poco frecuente se usa con datos a los que se obtiene acceso con menos frecuencia, pero que requieren un acceso rápido cuando es necesario. A diferencia de las demás clases de almacenamiento de S3, que almacenan datos en un mínimo de tres zonas de disponibilidad (AZ)
+- S3 Glacier: clase de almacenamiento de archivos que ofrece el almacenamiento de menor costo para los datos de larga duración a los que rara vez se accede. Se tarde entre 12h y 48h para su recuperación. $1/TB/month
+- S3 Glacier Deep Archive: es la clase de almacenamiento más económica de Amazon S3, y admite la retención a largo plazo y la conservación digital de datos a los que se accede una o dos veces al año
+- S3 Intelligent-Tiering es un nuevo tipo de almacenamiento de Amazon S3 diseñado para los clientes que deseen optimizar los costos de almacenamiento automáticamente cuando los patrones de acceso a los datos cambian, sin afectar el rendimiento o la sobrecarga operativa
+- [Mas info AWS](https://aws.amazon.com/es/s3/storage-classes/) 
+
+# EFS
+**Amazon Elastic File System (EFS)** brinda un sistema de archivos elástico sencillo, sin servidor y práctico. Sin tarifa mínima ni cargo de contratación.
+- Altamente disponible y duradero.
+- EFS ha incorporado protección contra una interrupción de la zona de disponibilidad
+- Tipos:brinda un sistema de archivos elástico sencillo, sin servidor y práctico. Sin tarifa mínima ni cargo de contratación.
+    - Standar
+    - Standar IA: Acceso poco frecuente
+    - Los archivos se mueven automaticamente de Standar a Standar IA en 30, 60 o 90 dias.
+- Encriptación de forma predeterminada
+
+# AWS Storage Gateway
+Es un servicio que brinda acceso virtual a la nube de manera ilimitada, consta con 3 puertas de acceso diferentes.
+1. File Gateway: Te brinda interfaces SMB y NFS para amazon S3, tanto en windows como en linux
+2. Tape Gateway: Migrar copias de seguridad o respaldo
+3. Volume Gateway: en bloque iSCSI , tanto almacenado como en caché. Con baja latencia.
